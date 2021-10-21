@@ -1,11 +1,15 @@
 <template>
-  <h1>Welcome to Your Vue.js App</h1>
+  <Login />
 </template>
 
 <script>
+import Login from './views/Login.vue'
+
 export default {
   name: 'App',
-  components: {}
+  components: {
+    Login
+  }
 }
 </script>
 
