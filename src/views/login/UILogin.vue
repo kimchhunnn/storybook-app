@@ -92,14 +92,18 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+@import "../../styles/variables.scss";
+
+$offset: 187;
+$duration: 1.4s;
 
 .central-login {
-  text-align: center;
-  background-color: #fff;
+  background-color: $color-white;
   width: 100%;
   height: 100vh;
 }
+
 .spinner {
   position: absolute;
   top: 0;
@@ -107,121 +111,144 @@ export default {
   bottom: 0;
   right: 0;
   margin: auto;
-  animation: rotator 1.4s linear infinite;
+  animation: rotator $duration linear infinite;
 }
+
 @keyframes rotator {
   0% {
     transform: rotate(0deg);
-}
+  }
   100% {
     transform: rotate(270deg);
+  }
 }
-}
+
 .path {
-  stroke-dasharray: 187;
+  stroke-dasharray: $offset;
   stroke-dashoffset: 0;
   transform-origin: center;
-  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+  animation: dash $duration ease-in-out infinite,
+    colors ($duration * 4) ease-in-out infinite;
 }
+
 @keyframes colors {
   0% {
     stroke: #4285f4;
-}
+  }
   25% {
     stroke: #de3e35;
-}
+  }
   50% {
     stroke: #f7c223;
-}
+  }
   75% {
     stroke: #1b9a59;
-}
+  }
   100% {
     stroke: #4285f4;
+  }
 }
-}
+
 @keyframes dash {
   0% {
-    stroke-dashoffset: 187;
-}
+    stroke-dashoffset: $offset;
+  }
   50% {
-    stroke-dashoffset: 46.75;
+    stroke-dashoffset: $offset/4;
     transform: rotate(135deg);
-}
+  }
   100% {
-    stroke-dashoffset: 187;
+    stroke-dashoffset: $offset;
     transform: rotate(450deg);
+  }
 }
-}
+
 .cl-title {
-  font-size: 2rem;
+  font-size: $font-32;
   line-height: 40px;
   padding-top: 6rem;
 }
+
 .cl-content {
   max-width: 36.625rem;
   margin: auto;
+
+  &--wrapper {
+    width: 100%;
+
+    table {
+      width: 100%;
+      text-align: left;
+
+      // margin-top: 0.375rem;
+      margin-bottom: 2.75rem;
+
+      font-size: $font-20;
+      line-height: 40px;
+
+      td {
+        &.field, &.label {
+          border-top: 66px solid $color-white;
+        }
+      }
+    }
+  }
+
+  .label {
+    width: 24.5%;
+  }
+
+  .field {
+    width: 75.5%;
+    height: 4rem;
+    padding-right: 8px;
+
+    input {
+      width: calc(100% - 2rem); // minus padding left-right
+      height: 100%;
+      border: 1px solid $color-black;
+      background-color: $color-light-gray;
+      font-size: $font-20;
+      line-height: 40px;
+      padding: 0 1rem;
+    }
+  }
+
+  #forgot-password-btn {
+      font-size: $font-16;
+      line-height: 16px;
+      border: none;
+      margin-top: 2rem;
+      background-color: $color-white;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+  #login-btn {
+    position: relative;
+    font-size: $font-20;
+    line-height: 40px;
+    width: 20rem;
+    height: 4rem;
+    border: 2px solid $color-black;
+    background-color: $color-white;
+
+    .spinner {
+      width: 25px;
+      height: 25px;
+    }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
-.cl-content--wrapper {
-  width: 100%;
-}
-.cl-content--wrapper table {
-  width: 100%;
-  text-align: left;
-  margin-bottom: 2.75rem;
-  font-size: 1.25rem;
-  line-height: 40px;
-}
-.cl-content--wrapper table td.field, .cl-content--wrapper table td.label {
-  border-top: 66px solid #fff;
-}
-.cl-content .label {
-  width: 24.5%;
-}
-.cl-content .field {
-  width: 75.5%;
-  height: 4rem;
-  padding-right: 8px;
-}
-.cl-content .field input {
-  width: calc(100% - 2rem);
-  height: 100%;
-  border: 1px solid #000;
-  background-color: #f4f4f4;
-  font-size: 1.25rem;
-  line-height: 40px;
-  padding: 0 1rem;
-}
-.cl-content #forgot-password-btn {
-    font-size: 1rem;
-    line-height: 16px;
-    border: none;
-    margin-top: 2rem;
-    background-color: #fff;
-}
-.cl-content #forgot-password-btn:hover {
-  cursor: pointer;
-}
-.cl-content #login-btn {
-  position: relative;
-  font-size: 1.25rem;
-  line-height: 40px;
-  width: 20rem;
-  height: 4rem;
-  border: 2px solid #000;
-  background-color: #fff;
-}
-.cl-content #login-btn .spinner {
-  width: 25px;
-  height: 25px;
-}
-.cl-content #login-btn.disabled {
-  pointer-events: none;
-  opacity: 0.3;
-}
-.cl-content #login-btn:hover {
-  cursor: pointer;
-}
- 
 
 </style>
