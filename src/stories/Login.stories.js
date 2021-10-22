@@ -6,6 +6,21 @@ export default {
   argTypes: {
     onLogin: { action: 'clicked' } ,
     onForgotPassword: { action: 'clicked' } ,
+    storeId: {
+      name: 'Store ID',
+      type: { name: 'string' },
+      description: 'Store ID',
+    },
+    password: {
+      name: 'Password',
+      type: { name: 'string' },
+      description: 'Password',
+    },
+    isLoggingIn: {
+      name: 'Is Loggin In',
+      type: { name: 'boolean' },
+      description: 'Is the app in logging in process?',
+    }
   },
 };
 

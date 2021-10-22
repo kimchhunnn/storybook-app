@@ -102,6 +102,7 @@ $duration: 1.4s;
   background-color: $color-white;
   width: 100%;
   height: 100vh;
+  text-align: center;
 }
 
 .spinner {
