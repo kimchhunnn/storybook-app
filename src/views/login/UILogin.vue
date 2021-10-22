@@ -19,7 +19,7 @@
                       <label for="store-id">管理者ID</label>
                     </td>
                     <td class="field">
-                      <UITextField v-model:storeId="storeId" name="storeId" id="storeId" />
+                      <input type="text" id="store-id" :value="storeId" name="store-id" autocomplete="off" @input="onInputStoreId">
                     </td>
                   </tr>
                   <tr>
@@ -27,18 +27,23 @@
                       <label for="password">パスワード</label>
                     </td>
                     <td class="field">
-                      <UIPasswordField v-model:password="password" name="password" id="password" />
+                      <input type="password" id="password" :value="password" name="password" autocomplete="off" @input="onInputPassword">
                     </td>
                   </tr>
                   <tr>
                     <td></td>
                     <td>
-                      <button id="forgot-password-btn" type="button" @click="forgotPassword">パスワード再発行</button>
+                      <button id="forgot-password-btn" type="button" @click="onForgotPassword">パスワード再発行</button>
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <UIButtonLogin :isLoggingIn="isLoggingIn" :isFormValid="isFormValid" @click="login" />
+              <button id="login-btn" type="submit" :class="{ disabled: !isFormValid || isLoggingIn }" @click="onLogin">
+                <span>ログイン</span>
+                <svg v-show="isLoggingIn" class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                  <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                </svg>
+              </button>
             </div>
           </form>
         </div>
@@ -49,22 +54,20 @@
 </template>
 
 <script>
-import UITextField from '../components/UITextField.vue';
-import UIPasswordField from '../components/UIPasswordField.vue';
-import UIButtonLogin from '../components/UIButtonLogin.vue';
-
 export default {
   name: "Login",
-  components: {
-    UITextField,
-    UIPasswordField,
-    UIButtonLogin
-  },
-  data: function () {
-    return {
-      storeId: "",
-      password: "",
-      isLoggingIn: false
+  props: {
+    storeId: {
+      type: [String],
+      default: ""
+    },
+    password: {
+      type: [String],
+      default: ""
+    },
+    isLoggingIn: {
+      type: [Boolean],
+      default: false
     }
   },
   computed: {
@@ -73,15 +76,17 @@ export default {
     }
   },
   methods: {
-    login: function () {
-      if (this.isFormValid) {
-        this.isLoggingIn = true;
-        console.log("Click login")
-      }
+    onInputStoreId(event) {
+      this.$emit("update:storeId", event.target.value);
     },
-    forgotPassword: function () {
-      console.log("StoreId: ", this.storeId)
-      console.log("Click forgotPassword")
+    onInputPassword(event) {
+      this.$emit("update:password", event.target.value);
+    },
+    onLogin: function () {
+      this.$emit("login");
+    },
+    onForgotPassword: function () {
+      this.$emit("forgotPassword");
     }
   },
 }
