@@ -1,7 +1,7 @@
 <template>
-  <div id="central-forget-pwd">
-    <div class="central-forget-pwd">
-      <div class="central-forget-pwd--wrapper">
+  <div id="central-forgot-pwd">
+    <div class="central-forgot-pwd">
+      <div class="central-forgot-pwd--wrapper">
 
         <h1>Reset Your Password Here</h1>
 
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "Forget-Password",
+  name: "Forgot-Password",
 }
 </script>
 
