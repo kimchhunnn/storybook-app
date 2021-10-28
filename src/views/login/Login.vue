@@ -27,11 +27,13 @@ export default {
     },
     login: function () {
       if (this.isFormValid) {
-        console.log("Login")
+        if (this.storeId == "00001" && this.password == "00001") {
+          this.$router.push({ path: "/home"});
+        }
       }
     },
     forgotPassword: function () {
-      console.log("ForgotPassword")
+      this.$router.push({ path: "/forgot_password"});
     }
   },
 }
